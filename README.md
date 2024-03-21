@@ -4,9 +4,9 @@ This is the GitHub repository for studying shaped penetrant diffusion in highly 
 
 # Create initial configuration
 
-''''
+```
 code
-''''
+```
 
 # Run simulations on LAMMPS
 
@@ -17,8 +17,10 @@ code
 # Raw data for figures in the main article and supporting information
 
 # Authors
+
 Tsai-Wei Lin and Charles E. Sing
 
 # Funding Acknowledgements
+
 This research was supported by the U.S. Department of Energy, Office of Basic Energy Sciences, Division of Materials Sciences and Engineering (Award No. DE-SC0020858), through the Materials Research Laboratory at the University of Illinois at Urbana-Champaign. Helpful discussions with Kenneth Schweizer and Baicheng Mei are gratefully acknowledged.
 

@@ -85,7 +85,7 @@ lmp_serial -in p-lj-T0.7-isf
 
 # Raw data for figures in the main article and supporting information
 
-See **data_JCP**. 
+See data_manuscript.zip
 
 # Authors
 Tsai-Wei Lin and Charles E. Sing

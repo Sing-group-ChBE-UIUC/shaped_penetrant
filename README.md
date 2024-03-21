@@ -58,7 +58,7 @@ lmp_serial -in p-lj-T1-xln
 ## 3. Study diffusion at target T
 Under the folder **Dp1.587-Np3-Enp1.0/f_0.333/T0.7-387279973-nvt**, run in the following order
 
-#### i. copy the **re-nw-T1.0** to folder **T{Ttarget}-{seednumber}-nvt**
+#### i. copy the re-nw-T1.0 from T1.0-387279973-xln to current directory
 
 #### ii. cool the system to target temperature
 
@@ -84,6 +84,8 @@ lmp_serial -in p-lj-T0.7-isf
 ```
 
 # Raw data for figures in the main article and supporting information
+
+See **data_JCP**. 
 
 # Authors
 Tsai-Wei Lin and Charles E. Sing

@@ -17,7 +17,6 @@ code
 # Raw data for figures in the main article and supporting information
 
 # Authors
-
 Tsai-Wei Lin and Charles E. Sing
 
 # Funding Acknowledgements

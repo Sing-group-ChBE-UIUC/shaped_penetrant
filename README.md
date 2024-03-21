@@ -1,7 +1,12 @@
 # shaped_penetrant
+
 This is the GitHub repository for studying shaped penetrant diffusion in highly crosslinked networks. For more detailed information, please refer to J. Chem. Phys. 160, 114905 (2024) https://doi.org/10.1063/5.0197140
 
 # Create initial configuration
+
+''''
+code
+''''
 
 # Run simulations on LAMMPS
 

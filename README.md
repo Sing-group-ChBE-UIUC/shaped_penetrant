@@ -20,7 +20,7 @@ bash mk-in-cfg-rod.sh Nrod AR len_pene Dp
 
 ### create one initial configuration at a time
 
-Note: Make sure the folder named **f_${fcross[i]}/initcfg-Np${Np}-AR${AR}-Dp${Dp}-lp${len_pene}** has been created before running the following 
+Note: Make sure the folder named **f_${fcross[i]}/initcfg-Nrod${Nrod}-AR${AR}-Dp${Dp}-lp${len_pene}** has been created before running the following 
 
 Run the code from the same directory using the executable with the following parameters: 
 
@@ -36,9 +36,6 @@ Run the code from the same directory using the executable with the following par
 ```
 ./in-cfg-nonsph-cpp.out 60 30 6 0 3 2 1.587 1.587
 ```
-
-or 
-
 
 # Run simulations on LAMMPS
 

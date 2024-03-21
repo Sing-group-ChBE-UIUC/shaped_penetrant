@@ -12,7 +12,14 @@ g++ -g -o in-cfg-nonsph-cpp.out init_config_nw_nonsph.cpp
 
 ## 2. Create structures
 
-### use the **mk-in-cfg-rod.sh** direclty under the same directory
+### create configurations all at once
+
+use the **mk-in-cfg-rod.sh** direclty under the same directory with the following parameters:
+
+    Nrod: number of rod-like penetrants
+    AR: how many bead a penetrants is composed of
+    len_pene: chain length between penetrant beads
+    Dp: penetrant bead diameter
 
 ```
 bash mk-in-cfg-rod.sh Nrod AR len_pene Dp

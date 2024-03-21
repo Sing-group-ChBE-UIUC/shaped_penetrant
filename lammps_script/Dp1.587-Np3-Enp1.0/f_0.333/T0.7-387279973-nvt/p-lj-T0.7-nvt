@@ -1,0 +1,99 @@
+######################## Variables ###############################
+variable E_np equal 1.0
+variable E_pp equal 1
+variable Pfix equal 0.0
+variable Tfix equal 0.7
+
+variable N_p equal 3.0
+variable D_p equal 1.587
+variable D_n equal 1
+variable D_np equal 0.5*(${D_p}+${D_n})
+variable Rc_np equal 2.5*${D_np}
+variable Rc_pp equal 2.5*${D_p}
+variable M_p equal 4 
+
+variable tstep equal 0.002
+variable T_dp equal 100*${tstep}
+variable P_dp equal 1000*${tstep}
+
+variable A equal 100.0
+
+variable Rmin equal 1.1
+variable Cprob equal 0.3
+variable Cseed equal 777
+
+log ./lmp_log_lj_Dp${D_p}_Np${N_p}_Enp${E_np}-T${Tfix}-nvt.lammps
+
+######################## INITIALIZATION ###############################
+units	lj
+dimension	3
+boundary	p p p
+atom_style	full
+
+######################## Read File ###############################
+read_restart ./re-T${Tfix}-short-npt
+velocity	all create ${Tfix} 97885 dist gaussian
+change_box	all x final -6.21038329700599 6.21038329700599 y final -6.21038329700599 6.21038329700599 z final -6.21038329700599 6.21038329700599
+
+neigh_modify exclude molecule/intra pene
+######################## Potential Information ###############################
+###------------------------ Pair potential ------------------------
+pair_style	lj/cut 2.5
+
+### atoms with type 1-5 are polymer beads
+pair_coeff	1*5	1*5	1.0 		${D_n}						#bead-bead
+pair_coeff	1*5	6	${E_np}		${D_np}	${Rc_np}		#bead-penetrant
+pair_coeff	6	6	${E_pp}		${D_p}	${Rc_pp}		#penetrant-penetrant
+
+###------------------------ Harmonic potential ------------------------
+bond_style	harmonic
+bond_coeff	* 1000.0 1.000			## K(1/2 included) equilibrium bond distance
+bond_coeff	4 1000.0 1.587			## K(1/2 included) equilibrium bond distance
+
+###------------------------ Bending potential ------------------------
+angle_style	cosine
+angle_coeff * 1.52						## K (energy)
+angle_coeff 4 1000						## K (energy)
+
+###------------------------ Special bond ------------------------
+### To turn on the 1-3 and 1-4 interactions and turn off the 1-2 interaction
+special_bonds lj 0.0 1.0 1.0
+
+### For a lj units system with FENE bonds, a setting of special bonds 0 1 1 should be used: 
+### turn on the 1-3, and 1-4 interactions and turn off the 1-2 interaction.
+#special_bonds fene angle no dihedral no
+
+######################## Set Time Step ###############################
+timestep	${tstep}
+
+######################## Boundary Conditions ###############################
+
+###------------------------ (1) Equilibrate at NVT ------------------------
+reset_timestep 0
+fix f1 all	nvt	temp ${Tfix} ${Tfix} ${T_dp}
+
+thermo 500000
+thermo_style custom step xhi temp press evdwl ebond eangle etotal pe ke
+run_style	verlet
+run 10000000
+unfix f1
+
+###------------------------ (2) Production run at NPT  ------------------------
+reset_timestep 0
+dump 	d1 all custom 300000 ./diff-nvt-T${Tfix}.bin id mol type mass q x y z
+dump_modify d1 sort id
+
+fix f2 all	nvt	temp ${Tfix} ${Tfix} ${T_dp}
+
+thermo 15000000
+thermo_style custom step xhi temp press evdwl ebond eangle etotal pe ke
+run_style	verlet
+restart 90000000 ./re-T${Tfix}-nvt
+run 900000000
+unfix f2
+undump d1
+write_restart ./re-T${Tfix}-nvt
+
+###------------------------ Jump to next ------------------------
+echo	log
+print "All done"

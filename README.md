@@ -1,5 +1,5 @@
 # shaped_penetrant
-This is the github repository for studying shaped penetrant diffusion in highly crosslinked networks. For more detailed information, please refer to 
+This is the GitHub repository for studying shaped penetrant diffusion in highly crosslinked networks. For more detailed information, please refer to 
 
 ## Create initial configuration
 
@@ -9,7 +9,5 @@ This is the github repository for studying shaped penetrant diffusion in highly 
 
 ### Study diffusion at target T
 
-## Post analysis
-
-## Raw data for figures in main article and supporting information
+## Raw data for figures in the main article and supporting information
 

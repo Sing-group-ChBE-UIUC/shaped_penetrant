@@ -39,9 +39,53 @@ Run the code from the same directory using the executable with the following par
 
 # Run simulations on LAMMPS
 
+Use Dp=1.587, Nrod=3, Enp=1.0, fcross = 0.333 as an example
+
+## Copy the initial configuration to each folder
+
 ## Create crosslinked networks at T=1
 
+Under the folder **Dp1.587-Np3-Enp1.0/f_0.333/T1.0-387279973-xln**, run
+```
+lmp_serial -in p-soft-T1
+```
+and then run 
+
+```
+lmp_serial -in p-lj-T1-xln
+```
+
+
+Under the folder Dp1.587-Np3-Enp1.0/f_0.333/T0.7-387279973-nvt
+ soft --> lj+xln --> cool --> short_npt --> nvt --> isf -->
+
+
 ## Study diffusion at target T
+
+Under the folder **Dp1.587-Np3-Enp1.0/f_0.333/T0.7-387279973-nvt**, run in the following order
+
+#### 1. cool the system to target temperature
+
+```
+lmp_serial -in p-lj-T0.7-cool
+```
+#### 2. short npt run to get averaged V
+
+```
+lmp_serial -in p-lj-T0.7-short-npt
+```
+
+#### 3. production run at NVT
+
+```
+lmp_serial -in p-lj-T0.7-nvt
+```
+
+#### 4. short NVT run to get short time data (optional)
+
+```
+lmp_serial -in p-lj-T0.7-isf
+```
 
 # Raw data for figures in the main article and supporting information
 
